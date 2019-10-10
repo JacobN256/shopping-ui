@@ -1,0 +1,12 @@
+.item-list {
+
+    &__card {
+        margin: 10px;
+        width: 300px;
+        height: 300px;
+
+        &__img {
+            width: 150px;
+        }
+    }
+}

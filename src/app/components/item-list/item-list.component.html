@@ -1,0 +1,10 @@
+<div fxFlex="grow" fxLayout="row" fxLayoutAlign="space-evenly">
+  <ng-container *ngFor="let item of items">
+    <mat-card class="item-list__card" fxLayout="column" [routerLink]="['item', item?.id]">
+      <button mat-button>
+        {{ item.name }} {{ item.price / 100 | currency }}
+      </button>
+      <img class="item-list__card__img" [src]="item?.image_url" mat-card-image />
+    </mat-card>
+  </ng-container>
+</div>
