@@ -1,6 +1,6 @@
 <div class="home">
   <h2>Item List</h2>
-  <div>
-    <app-item-list [items]="itemList$ | async"></app-item-list>
-  </div>
+  <ng-container *ngIf="itemList$ | async as itemList">
+    <app-item-list [items]="itemList"></app-item-list>
+  </ng-container>
 </div>

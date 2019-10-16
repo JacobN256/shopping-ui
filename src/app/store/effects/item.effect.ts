@@ -16,11 +16,14 @@ export class ItemEffects {
     getItem$ = this.actions$.pipe(
         ofType<GetItem>(EItemActions.GetItem),
         map(action => action.payload),
-        switchMap((id) => {
+        withLatestFrom(this.store.pipe(select(selectItemList))),
+        switchMap(([id, items]) => {
+            if (items && items.length > 0) {
+                return items.filter((value) => value.id === id);
+            }
             return this.itemService.getById(id);
         }),
         switchMap((response: any) => {
-            console.log(response);
             return of(new GetItemSuccess(response));
         }
         ));
@@ -28,7 +31,13 @@ export class ItemEffects {
     @Effect()
     getItems$ = this.actions$.pipe(
         ofType<GetItems>(EItemActions.GetItems),
-        switchMap(() => this.itemService.getItems()),
+        withLatestFrom(this.store.pipe(select(selectItemList))),
+        switchMap(([action, items]) => {
+            if (items && items.length > 0) {
+                return of(items);
+            }
+            return this.itemService.getItems();
+        }),
         switchMap((response: any) => of(new GetItemsSuccess(response)))
     );
 
