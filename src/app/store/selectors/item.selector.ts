@@ -14,3 +14,8 @@ export const selectSelectedItem = createSelector(
     selectItems,
     (state: ItemState) => state.selectedItem
 );
+
+export const selectLoaded = createSelector(
+    selectItems,
+    (state: ItemState) => state.loaded
+);

@@ -10,21 +10,14 @@ export const itemReducers = (
         case EItemActions.GetItemsSuccess: {
             return {
                 ...state,
-                items: action.payload,
-                loading: false
+                items: [...action.payload],
+                loaded: true
             };
         }
         case EItemActions.GetItemSuccess: {
             return {
                 ...state,
                 selectedItem: action.payload
-            };
-        }
-        case EItemActions.GetItems: {
-            console.log('hit it');
-            return {
-                ...state,
-                loading: true
             };
         }
 
